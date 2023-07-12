@@ -1,6 +1,7 @@
 package com.vireen.sqliteorz.core
 
 import android.content.Context
+import android.util.Log
 import com.vireen.sqliteorz.model.DBBaseModel
 
 /**
@@ -19,8 +20,16 @@ object OrzHelper {
 
     fun initialize(context: Context, default: String = "", vararg drivers: DBDriver) {
         for (driver in drivers) {
-            driver.getPath(context)
-            this.driverMap[driver.name] = DBox(driver, DBHelper(context, driver))
+            if (driver.models.isEmpty()) {
+                Log.e(TAG, "driver ${driver.name} not contains any models, are u ok?")
+                continue
+            }
+            DBox(driver, DBHelper(context, driver)).let {
+                this.driverMap[driver.name] = it
+            }
+        }
+        if (this.driverMap.isEmpty()) {
+            throw DBException("not provide any drivers")
         }
         this.defaultName = default.ifBlank { defaultName(context) }
     }

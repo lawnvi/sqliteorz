@@ -29,7 +29,7 @@ class DBDriver(
         this.models.add(obj::class.java)
     }
 
-    fun registerModels(models: Set<DBBaseModel>) {
+    fun registerModels(models: Collection<DBBaseModel>) {
         for (item in models) {
             //生成建表sql
             val sql = item.getCreateSql()
@@ -61,7 +61,8 @@ class DBDriver(
 
     internal fun getPath(context: Context): String {
         if (dirPath.isBlank()) {
-            dirPath = Environment.getExternalStorageDirectory().absolutePath
+//            dirPath = context.filesDir.absolutePath + "/database"
+            dirPath = context.getExternalFilesDir(null)?.absolutePath + "/database"
         }
 
         val f = File(dirPath)
@@ -74,6 +75,7 @@ class DBDriver(
         }
 
         dirPath = if (dirPath.endsWith("/")) dirPath else "$dirPath/"
+        Log.i(TAG, "db path: $dirPath$name")
         return dirPath + name
     }
 }
