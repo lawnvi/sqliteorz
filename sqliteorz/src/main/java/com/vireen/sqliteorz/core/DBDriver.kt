@@ -41,20 +41,28 @@ class DBDriver(
 
     fun registerModel(T: Class<out DBBaseModel>) {
         //生成建表sql
-        val model = T.newInstance()
-        val sql = model.getCreateSql()
-        Log.i(TAG, "add create sql: $sql")
-        createSql[model.getTableName()] = sql
-        this.models.add(T)
+        try {
+            val model = T.getConstructor().newInstance()
+            val sql = model.getCreateSql()
+            Log.i(TAG, "add create sql: $sql")
+            createSql[model.getTableName()] = sql
+            this.models.add(T)
+        }catch (e: Exception) {
+            throw DBException("ORZ model need a no argument constructor, model: ${T.name}")
+        }
     }
 
     fun registerModels(Ts: Set<Class<out DBBaseModel>>) {
         for (T in Ts) {
-            //生成建表sql
-            val model = T.newInstance()
-            val sql = model.getCreateSql()
-            Log.i(TAG, "add create sql: $sql")
-            createSql[model.getTableName()] = sql
+            try {
+                //生成建表sql
+                val model = T.getConstructor().newInstance()
+                val sql = model.getCreateSql()
+                Log.i(TAG, "add create sql: $sql")
+                createSql[model.getTableName()] = sql
+            }catch (e: Exception) {
+                throw DBException("ORZ model need a no argument constructor, model: ${T.name}")
+            }
         }
         this.models.addAll(Ts)
     }
