@@ -20,7 +20,7 @@ description = "a simple sqlite orm which names orz"
 
 afterEvaluate {
     publishing {
-        def versionName = "0.0.1-SNAPSHOT" // 当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
+        def versionName = "0.0.2-SNAPSHOT" // 当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
         publications {
             // Creates a Maven publication called "release".
             release(MavenPublication) {
