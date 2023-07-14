@@ -41,7 +41,12 @@ data class DemoModel(
     var age: Int = 18,
     var gender: Boolean = true,
     var content: String = "",
-)
+) {
+    // 自定义表名
+    override fun getTableName(): String {
+        return super.getTableName()
+    }
+}
 
 /**
  * 配置数据库名称，位置，表
