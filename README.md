@@ -9,8 +9,30 @@ a simple sqlite orm which names orz
 > 你只需要将你的数据库model继承DBBaseModel，初始化数据库   
 > 就可以不再对每个字段从cursor赋值了   
 > 一起来看看吧  
+  
+  
+  
+### 如何引入
+```groovy
+// corp from [jitpack](https://jitpack.io)
+// step 1. Add the JitPack repository to your build file
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
 
+// Step 2. Add the dependency
+dependencies {
+    implementation 'com.github.lawnvi:sqliteorz:1.0.0'
+}
 
+```
+  
+  
+  
+### 如何使用
 ```kotlin
 /**
  * @DemoModel 让你的数据库的模型继承DBBaseModel
