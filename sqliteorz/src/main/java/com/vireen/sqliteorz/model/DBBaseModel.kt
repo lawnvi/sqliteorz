@@ -174,7 +174,11 @@ open class DBBaseModel {
             str
     }
 
-    fun getTableName(): String{
+    /**
+     * 自定义表名
+     * 默认使用上级dir+model name
+     */
+    open fun getTableName(): String{
         var clazzName = this.javaClass.name.substringBeforeLast(".").substringAfterLast(".")
         clazzName += this.javaClass.simpleName
         return clazzName.lowercase(Locale.ROOT)
