@@ -10,6 +10,9 @@ afterEvaluate {
     publishing {
         publications{
             release(MavenPublication) {
+                groupId = 'com.github.lawnvi'
+                artifactId = 'sqliteorz'
+                version = '1.0.0'
                 from components.release
             }
         }

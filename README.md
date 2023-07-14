@@ -15,12 +15,10 @@ a simple sqlite orm which names orz
 ### 如何引入
 ```groovy
 // corp from [jitpack](https://jitpack.io)
-// step 1. Add the JitPack repository to your build file
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
+// step 1. Add the JitPack repository to your repositories
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 // Step 2. Add the dependency
